@@ -61,10 +61,9 @@ public class HiloBarra1 extends Thread{
             if(barra.getValue()>=600){
                 vive=false;
                 barra.setValue(0);
-                JOptionPane.showMessageDialog(barra, "El "+c+" llegó a los "+ht.getM()+" minutos con "+ht.getS()+" segundos");
             }
             try {
-                Thread.sleep(100);
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(HiloBarra1.class.getName()).log(Level.SEVERE, null, ex);
             }

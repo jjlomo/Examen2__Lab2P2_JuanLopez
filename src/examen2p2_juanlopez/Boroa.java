@@ -513,6 +513,14 @@ public class Boroa extends javax.swing.JFrame {
         hh.start();
         Thread hhh=new Thread(h2);
         hhh.start();
+        if(jp_carro1.isMaximumSizeSet()&&jp_carro2.getValue()<600){
+            JOptionPane.showMessageDialog(jf_carrera, "El "+c1+" llegó en un tiempo de "+jl_cronometro);
+        }else if (jp_carro2.isMaximumSizeSet()&&jp_carro1.getValue()<600) {
+            JOptionPane.showMessageDialog(jf_carrera, "El "+c2+" llegó en un tiempo de "+jl_cronometro);
+        }else if(jp_carro1.isMaximumSizeSet()&&jp_carro2.isMaximumSizeSet()){
+            JOptionPane.showMessageDialog(jf_carrera, "Empate en un tiempo de "+jl_cronometro);
+
+        }
         
 //        h1.run();
 //        h2.run();

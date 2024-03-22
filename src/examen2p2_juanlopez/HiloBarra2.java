@@ -59,7 +59,7 @@ public class HiloBarra2 extends Thread{
                 barra.setValue(0);
             }
             try {
-                Thread.sleep(100);
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(HiloBarra1.class.getName()).log(Level.SEVERE, null, ex);
             }
