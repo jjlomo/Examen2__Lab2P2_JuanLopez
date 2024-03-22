@@ -14,6 +14,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,8 +30,7 @@ public class Boroa extends javax.swing.JFrame {
         this.setVisible(false);
         jf_carros.pack();
         jf_carros.setLocationRelativeTo(this);
-        jf_carrera.pack();
-        jf_carrera.setLocationRelativeTo(this);
+        
         jf_carros.setVisible(true);
         File archivo =new File("./AnyConv.com__Rick Astley - Never Gonna Give You Up (Official Music Video)(MP3_160K).wav");
         try {
@@ -94,15 +94,16 @@ public class Boroa extends javax.swing.JFrame {
         cb_carros1 = new javax.swing.JComboBox<>();
         bt_cerrar = new javax.swing.JButton();
         bt_crear3 = new javax.swing.JButton();
-        jf_carrera = new javax.swing.JFrame();
+        jf_carrer1a = new javax.swing.JFrame();
+        jf_carrera = new javax.swing.JDialog();
         jPanel7 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        jl_cronometro = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jl_carro2 = new javax.swing.JLabel();
         jl_carro1 = new javax.swing.JLabel();
-        jProgressBar1 = new javax.swing.JProgressBar();
-        jProgressBar2 = new javax.swing.JProgressBar();
+        jp_carro2 = new javax.swing.JProgressBar();
+        jp_carro1 = new javax.swing.JProgressBar();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         bt_crear = new javax.swing.JButton();
@@ -239,6 +240,17 @@ public class Boroa extends javax.swing.JFrame {
             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
         );
 
+        javax.swing.GroupLayout jf_carrer1aLayout = new javax.swing.GroupLayout(jf_carrer1a.getContentPane());
+        jf_carrer1a.getContentPane().setLayout(jf_carrer1aLayout);
+        jf_carrer1aLayout.setHorizontalGroup(
+            jf_carrer1aLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 363, Short.MAX_VALUE)
+        );
+        jf_carrer1aLayout.setVerticalGroup(
+            jf_carrer1aLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 312, Short.MAX_VALUE)
+        );
+
         jPanel7.setBackground(new java.awt.Color(153, 153, 153));
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 0, 0), 5));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -248,10 +260,10 @@ public class Boroa extends javax.swing.JFrame {
         jLabel14.setText("Tiempo");
         jPanel7.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(102, 255, 102));
-        jLabel15.setText("00:00");
-        jPanel7.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
+        jl_cronometro.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jl_cronometro.setForeground(new java.awt.Color(102, 255, 102));
+        jl_cronometro.setText("00:00");
+        jPanel7.add(jl_cronometro, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("MS Reference Sans Serif", 3, 18)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(204, 0, 0));
@@ -265,8 +277,12 @@ public class Boroa extends javax.swing.JFrame {
         jl_carro1.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         jl_carro1.setText("                     ");
         jPanel7.add(jl_carro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
-        jPanel7.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 290, 30));
-        jPanel7.add(jProgressBar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 290, 30));
+
+        jp_carro2.setMaximum(600);
+        jPanel7.add(jp_carro2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 290, 30));
+
+        jp_carro1.setMaximum(600);
+        jPanel7.add(jp_carro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 290, 30));
 
         javax.swing.GroupLayout jf_carreraLayout = new javax.swing.GroupLayout(jf_carrera.getContentPane());
         jf_carrera.getContentPane().setLayout(jf_carreraLayout);
@@ -481,10 +497,27 @@ public class Boroa extends javax.swing.JFrame {
 
     private void bt_optimusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_optimusActionPerformed
         // TODO add your handling code here:
+        jf_carrera.setLocationRelativeTo(this);
+        jf_carrera.pack();
+        jf_carrera.setVisible(true);
         Carro c1=(Carro) cb_carros1.getSelectedItem();
         Carro c2=(Carro) cb_carros2.getSelectedItem();
         jl_carro1.setText(c1.getModelo());
         jl_carro2.setText(c2.getModelo());
+        HiloBarra1 h1=new HiloBarra1(jp_carro1, c1.getVel(), c1);
+        HiloBarra2 h2=new HiloBarra2(jp_carro2, c2.getVel());
+        HiloTiempo ht=new HiloTiempo(jl_cronometro);
+        Thread h=new HiloTiempo(jl_cronometro);
+        h.start();
+        Thread hh= new Thread(h1);
+        hh.start();
+        Thread hhh=new Thread(h2);
+        hhh.start();
+        
+//        h1.run();
+//        h2.run();
+//        ht.start();
+       
     }//GEN-LAST:event_bt_optimusActionPerformed
 
     /**
@@ -536,7 +569,6 @@ AdminCarro ac=new AdminCarro("./hotwheels.jjlm");
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -553,18 +585,20 @@ AdminCarro ac=new AdminCarro("./hotwheels.jjlm");
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JProgressBar jProgressBar2;
-    private javax.swing.JFrame jf_carrera;
+    private javax.swing.JFrame jf_carrer1a;
+    private javax.swing.JDialog jf_carrera;
     private javax.swing.JFrame jf_carros;
     private javax.swing.JLabel jl_carro1;
     private javax.swing.JLabel jl_carro2;
+    private javax.swing.JLabel jl_cronometro;
     private javax.swing.JLabel jl_marca;
     private javax.swing.JLabel jl_marca1;
     private javax.swing.JLabel jl_modelo;
     private javax.swing.JLabel jl_modelo1;
     private javax.swing.JLabel jl_vel;
     private javax.swing.JLabel jl_vel1;
+    private javax.swing.JProgressBar jp_carro1;
+    private javax.swing.JProgressBar jp_carro2;
     private javax.swing.JSpinner js_vel;
     private javax.swing.JTextField tf_marca;
     private javax.swing.JTextField tf_modelo;
